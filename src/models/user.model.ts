@@ -16,15 +16,19 @@ import bcrypt from 'bcryptjs';
 })
 export class User {
     @prop()
+        // @ts-ignore
     name: string;
 
     @prop({unique: true, required: true})
+        // @ts-ignore
     email: string
 
     @prop({required: true, minlength: 6, maxlength: 20, select: false})
+        // @ts-ignore
     password: string;
 
     @prop({default: 'user'})
+        // @ts-ignore
     role: string;
 
     // Instance method to check if passwords match
