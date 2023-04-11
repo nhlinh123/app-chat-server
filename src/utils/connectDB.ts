@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 import config from 'config';
+import {dbName, dbPass} from "../../config/custom-environment-variables";
 
-const dbUrl = `mongodb://${config.get('dbName')}:${config.get(
-    'dbPass'
-)}@localhost:6000/jwtAuth?authSource=admin`;
+const dbUrl = `mongodb://${dbName}:${dbPass}@localhost:6000/jwtAuth?authSource=admin`;
 
 const connectDB = async () => {
     try {

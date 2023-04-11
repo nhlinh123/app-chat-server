@@ -1,6 +1,6 @@
 import config from 'config';
 import { CookieOptions, NextFunction, Request, Response } from 'express';
-import { CreateUserInput, LoginUserInput } from '../schema/user.schema';
+import { CreateUserInput, LoginUserInput } from '../schemas/user.schema';
 import { createUser, findUser, signToken } from '../services/user.service';
 import AppError from '../utils/appError';
 

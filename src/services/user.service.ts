@@ -21,7 +21,7 @@ export const findUserById = async (id: string) => {
 
 // Find All users
 export const findAllUsers = async () => {
-    return await userModel.find();
+    return userModel.find();
 };
 
 // Find one user by any fields
@@ -29,13 +29,13 @@ export const findUser = async (
     query: FilterQuery<User>,
     options: QueryOptions = {}
 ) => {
-    return await userModel.findOne(query, {}, options).select('+password');
+    return userModel.findOne(query, {}, options).select('+password');
 };
 
 // Sign Token
 export const signToken = async (user: DocumentType<User>) => {
     // Sign the access token
-    const access_token = signJwt(
+    const accessToken = signJwt(
         { sub: user._id },
         {
             expiresIn: `${config.get<number>('accessTokenExpiresIn')}m`,
@@ -43,11 +43,11 @@ export const signToken = async (user: DocumentType<User>) => {
     );
 
     // Create a Session
-    redisClient.set(user._id, JSON.stringify(user), {
+    await redisClient.set(user._id.toString(), JSON.stringify(user), {
         EX: 60 * 60,
     });
 
     // Return access token
-    return { access_token };
+    return { accessToken };
 };
 
